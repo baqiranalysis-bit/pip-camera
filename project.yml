@@ -1,30 +1,38 @@
 name: PIPCamera
+
 options:
   bundleIdPrefix: com.baqir
   deploymentTarget:
     iOS: "16.0"
+
 settings:
   base:
     SWIFT_VERSION: "5.0"
     PRODUCT_BUNDLE_IDENTIFIER: com.baqir.PIPCamera
-    INFOPLIST_FILE: PIPCamera/Info.plist
+
 targets:
   PIPCamera:
     type: application
     platform: iOS
+
     sources:
-      - PIPCamera
-    settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.baqir.PIPCamera
-        TARGETED_DEVICE_FAMILY: "1"
-        SUPPORTS_MACCATALYST: NO
-        SWIFT_VERSION: "5.0"
+      - CameraManager.swift
+      - CameraViewController.swift
+      - PIPCameraApp.swift
+      - PiPManager.swift
+
     info:
-      path: PIPCamera/Info.plist
+      path: Info.plist
       properties:
         CFBundleDisplayName: PIP Camera
         NSCameraUsageDescription: PIP Camera needs access to your camera to show your video in Picture in Picture.
         NSMicrophoneUsageDescription: PIP Camera needs microphone access when microphone is enabled.
         UIBackgroundModes:
           - audio
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.baqir.PIPCamera
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        SWIFT_VERSION: "5.0"
