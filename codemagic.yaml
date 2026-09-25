@@ -4,23 +4,28 @@ workflows:
     max_build_duration: 30
     instance_type: mac_mini_m2
 
-environment:
-  xcode: latest
-scripts:
-  - name: Install XcodeGen
-    script: |
-      brew install xcodegen
-  - name: Generate Xcode project
-    script: |
-      xcodegen generate
-  - name: Build iOS app
-    script: |
-      xcodebuild \
-        -project PIPCamera.xcodeproj \
-        -scheme PIPCamera \
-        -sdk iphoneos \
-        -configuration Debug \
-        CODE_SIGNING_ALLOWED=NO \
-        build
-artifacts:
-  - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphoneos/PIPCamera.app
+    environment:
+      xcode: latest
+
+    scripts:
+      - name: Install XcodeGen
+        script: |
+          brew install xcodegen
+
+      - name: Generate Xcode project
+        script: |
+          xcodegen generate
+
+      - name: Build iOS app
+        script: |
+          xcodebuild \
+            -project PIPCamera.xcodeproj \
+            -scheme PIPCamera \
+            -sdk iphoneos \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+    artifacts:
+      - build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphoneos/*.app
